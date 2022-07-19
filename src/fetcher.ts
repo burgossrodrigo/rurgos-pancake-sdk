@@ -1,5 +1,5 @@
 import { Contract } from '@ethersproject/contracts'
-import { jsonRpcProvider } from '@ethersproject/providers'
+import { JsonRpcProvider } from '@ethersproject/providers'
 import { TokenAmount } from './entities/fractions/tokenAmount'
 import { Pair } from './entities/pair'
 import IPancakePair from './abis/IPancakePair.json'
@@ -34,7 +34,7 @@ export abstract class Fetcher {
   public static async fetchTokenData(
     chainId: ChainId,
     address: string,
-    provider = new jsonRpcProvider('https://bsc-dataseed1.binance.org/'),
+    provider = new JsonRpcProvider('https://bsc-dataseed1.binance.org/'),
     symbol?: string,
     name?: string
   ): Promise<Token> {
@@ -63,7 +63,7 @@ export abstract class Fetcher {
   public static async fetchPairData(
     tokenA: Token,
     tokenB: Token,
-    provider = new jsonRpcProvider('https://bsc-dataseed1.binance.org/')
+    provider = new JsonRpcProvider('https://bsc-dataseed1.binance.org/')
   ): Promise<Pair> {
     invariant(tokenA.chainId === tokenB.chainId, 'CHAIN_ID')
     const address = Pair.getAddress(tokenA, tokenB)
